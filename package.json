@@ -1,0 +1,40 @@
+{
+  "name": "betahealt-v1",
+  "version": "1.0.0",
+  "description": "rest API aplicacion bethahealt",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Software-Over-root/betahealt-v1.git"
+  },
+  "author": "Oscar Isaac Lopez Rojas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Software-Over-root/betahealt-v1/issues"
+  },
+  "homepage": "https://github.com/Software-Over-root/betahealt-v1#readme",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "compression": "^1.7.4",
+    "connect-mongo": "^4.6.0",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "express-fileupload": "^1.3.1",
+    "express-session": "^1.17.2",
+    "fs": "^0.0.1-security",
+    "helmet": "^5.0.2",
+    "http": "^0.0.1-security",
+    "https": "^1.0.0",
+    "mongoose": "^6.2.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
