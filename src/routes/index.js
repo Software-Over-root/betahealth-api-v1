@@ -4,6 +4,8 @@ const router = express.Router();
 const users = require("../controllers/Users");
 const almacen = require("../controllers/almacen");
 const productos = require("../controllers/productos");
+const proveedores = require("../controllers/proveedor");
+const gastos = require("../controllers/gastos");
 
 module.exports = function(){
 
@@ -18,6 +20,20 @@ module.exports = function(){
 
     // productos
     router.post('/agregar-producto', productos.agregarProducto);
+
+    // proveedores
+    router.get('/proveedores', proveedores.obtenerProveedores);
+    router.get('/proveedor/:id', proveedores.obtenerProveedor);
+    router.put('/actualizar-proveedor/:id', proveedores.actualizarProveedor);
+    router.delete('/eliminar-proveedor/:id', proveedores.eliminarProveedor);
+    router.post('/agregar-proveedor', proveedores.agregarProveedor);
+
+    // gastos
+    router.get('/gastos', gastos.obtenerGastos);
+    router.get('/gasto/:id', gastos.obtenerGasto);
+    router.put('/actualizar-gasto/:id', gastos.actualizarGasto);
+    router.delete('/eliminar-gasto/:id', gastos.eliminarGasto);
+    router.post('/agregar-gasto', gastos.agregarGasto);
 
 
     return router;
