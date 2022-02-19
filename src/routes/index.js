@@ -8,10 +8,18 @@ const categoria = require("../controllers/categoria");
 const categoria_gastos = require("../controllers/categoria_gastos");
 const sub_categoria_gastos = require("../controllers/sub_categoria_gastos");
 const usuarios = require("../controllers/usuarios");
+const campanias = require("../controllers/campanias");
 
 module.exports = function(){
 
     router.get('/', users.holaMundo);
+
+    //campañas
+    router.get('/campanias', campanias.obtenerCampanias);
+    router.get('/campania/:id', campanias.obtenerCampania);
+    router.put('/actualizar-campania/:id', campanias.actualizarCampaña);
+    router.delete('/eliminar-campania/:id', campanias.eliminarCampania);
+    router.post('/agregar-campania', campanias.agregarCampania);
 
     // almacenes
     router.get('/almacenes', almacen.obtenerAlmacenes);
