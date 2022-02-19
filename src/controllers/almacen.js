@@ -6,10 +6,10 @@ exports.agregarAlmacen = (req, res, next) => {
     const { nombre, ciudad, domicilio, telefono, correo } = req.body;
     const nuevoAlmacen = almacenSchema({ nombre, ciudad, domicilio, telefono, correo });
     nuevoAlmacen.save()
-    .then(result => {
-        res.send({success: true, message:"El alamacen fue agregado correctamente", type: result});
+    .then(data => {
+        res.send({success: true, message:"El alamacen fue agregado correctamente", data});
     }).catch(err => {
-        res.send({success: false, message:"No se logro guardar el almacen", type: err});
+        res.send({success: false, message:"No se logro guardar el almacen", err});
     });
 }
 
@@ -20,7 +20,7 @@ exports.obtenerAlmacenes = (req, res, next) => {
     .then(data => {
         res.send({success: true, message:"Informacion obtenida correctamentee", data});
     }).catch(err => {
-        res.send({success: false, message:"No se logro obtener los almacenes", type: err});
+        res.send({success: false, message:"No se logro obtener los almacenes", err});
     });
 }
 
@@ -32,7 +32,7 @@ exports.obtenerAlmacene = async (req, res, next) => {
     .then(data => {
         res.send({success: true, message:"Informacion obtenida correctamentee", data});
     }).catch(err => {
-        res.send({success: false, message:"No se logro obtener el almacen", type: err});
+        res.send({success: false, message:"No se logro obtener el almacen", err});
     });  
 }
 
@@ -45,7 +45,7 @@ exports.eliminarAlmacen = async (req, res, next) => {
         res.send({success: true, message:"Almacen eliminado correctamente", data});
     })
     .catch(err => {
-        res.send({success: false, message:"No se logro eliminar el almacen", type: err});
+        res.send({success: false, message:"No se logro eliminar el almacen", err});
     }); 
 }
 
@@ -58,7 +58,7 @@ exports.actualizarAlmacen = async (req, res, next) => {
     .then(data => {
         res.send({success: true, message:"Almacen actualizado correctamente", data});
     })
-    .catch(err => {
-        res.send({success: false, message:"No se logro actualizar el almacen", type: err});
+    .catch(error => {
+        res.send({success: false, message:"No se logro actualizar el almacen", err});
     });
 }
