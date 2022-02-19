@@ -58,7 +58,7 @@ exports.actualizarAlmacen = async (req, res, next) => {
     .then(data => {
         res.send({success: true, message:"Almacen actualizado correctamente", data});
     })
-    .catch(error => {
+    .catch(err => {
         res.send({success: false, message:"No se logro actualizar el almacen", type: err});
     });
 }
