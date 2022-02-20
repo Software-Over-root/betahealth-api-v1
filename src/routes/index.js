@@ -4,12 +4,15 @@ const router = express.Router();
 const users = require("../controllers/Users");
 const almacen = require("../controllers/almacen");
 const productos = require("../controllers/productos");
+const proveedores = require("../controllers/proveedor");
+const gastos = require("../controllers/gastos");
 const categoria = require("../controllers/categoria");
 const categoria_gastos = require("../controllers/categoria_gastos");
 const sub_categoria_gastos = require("../controllers/sub_categoria_gastos");
 const usuarios = require("../controllers/usuarios");
 const campanias = require("../controllers/campanias");
 const paquetes = require("../controllers/paquetes");
+const pacientes = require("../controllers/pacientes");
 
 module.exports = function(){
 
@@ -71,7 +74,26 @@ module.exports = function(){
     router.delete('/eliminar-paquete/:id', paquetes.eliminarPaquete);
     router.post('/agregar-paquete', paquetes.agregarPaquete);
 
+    //pacientes
+    router.get('/pacientes', pacientes.obtenerPacientes);
+    router.get('/paciente/:id', pacientes.obtenerPaciente);
+    router.put('/actualizar-paciente/:id',pacientes.actualizarPaciente);
+    router.delete('/eliminar-paciente/:id', pacientes.eliminarPaciente);
+    router.post('/agregar-paciente', pacientes.agregarPaciente);
 
+    // proveedores
+    router.get('/proveedores', proveedores.obtenerProveedores);
+    router.get('/proveedor/:id', proveedores.obtenerProveedor);
+    router.put('/actualizar-proveedor/:id', proveedores.actualizarProveedor);
+    router.delete('/eliminar-proveedor/:id', proveedores.eliminarProveedor);
+    router.post('/agregar-proveedor', proveedores.agregarProveedor);
+
+    // gastos
+    router.get('/gastos', gastos.obtenerGastos);
+    router.get('/gasto/:id', gastos.obtenerGasto);
+    router.put('/actualizar-gasto/:id', gastos.actualizarGasto);
+    router.delete('/eliminar-gasto/:id', gastos.eliminarGasto);
+    router.post('/agregar-gasto', gastos.agregarGasto);
 
 
     return router;
