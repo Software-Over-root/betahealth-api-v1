@@ -9,6 +9,7 @@ const categoria_gastos = require("../controllers/categoria_gastos");
 const sub_categoria_gastos = require("../controllers/sub_categoria_gastos");
 const usuarios = require("../controllers/usuarios");
 const campanias = require("../controllers/campanias");
+const pacientes = require("../controllers/pacientes");
 
 module.exports = function(){
 
@@ -62,6 +63,13 @@ module.exports = function(){
     router.put('/actualizar-usuario/:id',usuarios.actualizarUsuario);
     router.delete('/eliminar-usuario/:id', usuarios.eliminarUsuario);
     router.post('/agregar-usuario', usuarios.agregarUsuario);
+
+    //pacientes
+    router.get('/pacientes', pacientes.obtenerPacientes);
+    router.get('/paciente/:id', pacientes.obtenerPaciente);
+    router.put('/actualizar-paciente/:id',pacientes.actualizarPaciente);
+    router.delete('/eliminar-paciente/:id', pacientes.eliminarPaciente);
+    router.post('/agregar-paciente', pacientes.agregarPaciente);
 
 
     return router;
