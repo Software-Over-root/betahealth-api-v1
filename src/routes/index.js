@@ -11,6 +11,7 @@ const categoria_gastos = require("../controllers/categoria_gastos");
 const sub_categoria_gastos = require("../controllers/sub_categoria_gastos");
 const usuarios = require("../controllers/usuarios");
 const campanias = require("../controllers/campanias");
+const paquetes = require("../controllers/paquetes");
 const pacientes = require("../controllers/pacientes");
 
 module.exports = function(){
@@ -65,6 +66,13 @@ module.exports = function(){
     router.put('/actualizar-usuario/:id',usuarios.actualizarUsuario);
     router.delete('/eliminar-usuario/:id', usuarios.eliminarUsuario);
     router.post('/agregar-usuario', usuarios.agregarUsuario);
+
+    //paquetes
+    router.get('/paquetes', paquetes.obtenerPaquete);
+    router.get('/paquete/:id', paquetes.obtenerUnPaquete);
+    router.put('/actualizar-paquete/:id',paquetes.actualizarPaquete);
+    router.delete('/eliminar-paquete/:id', paquetes.eliminarPaquete);
+    router.post('/agregar-paquete', paquetes.agregarPaquete);
 
     //pacientes
     router.get('/pacientes', pacientes.obtenerPacientes);
