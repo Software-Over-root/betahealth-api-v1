@@ -2,8 +2,8 @@ const productosSchema = require("../models/productos");
 
 //Agregar producto
 exports.agregarProducto = async (req, res, next) => {
-    const { id_categoria,nombre,descripcion,unidad_de_medida,precio } = req.body;
-    const nuevoProducto = productosSchema({ id_categoria,nombre,descripcion,unidad_de_medida,precio });
+    const { id_categoria, nombre, descripcion, unidad_medida, precio } = req.body;
+    const nuevoProducto = productosSchema({ id_categoria, nombre, descripcion, unidad_medida, precio });
     await nuevoProducto.save()
     .then((data) => {
         res.send({success: true, message:"El producto fue agregado correctamente", data});
@@ -15,6 +15,17 @@ exports.agregarProducto = async (req, res, next) => {
 //Obtener productos
 exports.obtenerProducto = async (req, res, next) => {
     productosSchema.find()
+    .then( data =>{
+        res.send({success: true, message:"Productos obtenido correctamente", data});
+    }).catch(err =>{
+        res.send({success: false, message:"No se encontro el producto", err});
+    })
+}
+
+//Obtener productos
+exports.obtenerProductosCategoria = async (req, res, next) => {
+    const {id} = req.params;
+    productosSchema.find({"id_categoria": id})
     .then( data =>{
         res.send({success: true, message:"Productos obtenido correctamente", data});
     }).catch(err =>{
@@ -49,7 +60,7 @@ exports.eliminarProducto = async (req, res, next)=>{
 exports.actualizarProducto = async (req, res, next)=>{
     const {id} = req.params;
     const {id_categoria,nombre,descripcion,unidad_de_medida,precio } = req.body
-    productosSchema.updateMany({_id:id}, { $set:{id_categoria,nombre,descripcion,unidad_de_medida,precio }})
+    productosSchema.updateMany({_id:id}, { $set:{id_categoria, nombre, descripcion, unidad_medida, precio }})
     .then(data =>{
         res.send({success:true , message:"Producto acutalizado correctamente", data});
     }).catch(err => {

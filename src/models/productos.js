@@ -1,10 +1,10 @@
 const { Schema, model } = require("mongoose");
-//FIXME: parametro de precio debe ser float
 
 const productosSchema = new Schema(
     {
         id_categoria: {
-            type: String,
+            type: Schema.ObjectId,
+            ref: "categorias",
             required: true
         },
         nombre: {
@@ -15,12 +15,12 @@ const productosSchema = new Schema(
             type: String,
             required: true
         },
-        unidad_de_medida: {
+        unidad_medida: {
             type: String,
             required: true
         },
         precio: {
-            type: String,
+            type: Number,
             required: true
         }
     },

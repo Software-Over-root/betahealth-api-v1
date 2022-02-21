@@ -34,6 +34,7 @@ module.exports = function(){
 
     // productos
     router.get('/productos', productos.obtenerProducto);
+    router.get('/productos-categoria/:id', productos.obtenerProductosCategoria);
     router.get('/producto/:id', productos.obtenerUnProducto);
     router.put('/actualizar-producto/:id',productos.actualizarProducto);
     router.delete('/eliminar-producto/:id', productos.eliminarProducto);
@@ -41,6 +42,7 @@ module.exports = function(){
 
     //categoria
     router.get('/categorias', categoria.obtenerCategorias);
+    router.get('/categorias-almacen/:id', categoria.obtenerConAlmacenes);
     router.get('/categoria/:id', categoria.obtenerUnaCategoria);
     router.put('/actualizar-categoria/:id', categoria.actualizarCategoria);
     router.delete('/eliminar-categoria/:id', categoria.eliminarCategoria);
