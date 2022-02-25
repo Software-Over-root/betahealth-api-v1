@@ -37,7 +37,7 @@ exports.obtenerUnaCategoria = async (req, res, next)=>{
 //Obtener categorias por id de almacen
 exports.obtenerConAlmacenes = async (req, res, next)=>{
     const {id} = req.params;
-    categoriaSchema.find({"id_almacen": id})
+    categoriaSchema.find({"id_almacen": id}).sort("nombre")
     .then(data =>{
         res.send({success: true , message:"Se encontro las categorias", data});
     }).catch(err =>{
