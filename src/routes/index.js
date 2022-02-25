@@ -13,6 +13,12 @@ const usuarios = require("../controllers/usuarios");
 const campanias = require("../controllers/campanias");
 const paquetes = require("../controllers/paquetes");
 const pacientes = require("../controllers/pacientes");
+const ventas = require("../controllers/ventas");
+const lotes = require("../controllers/lotes");
+const ordenes = require("../controllers/ordenes_proveedor");
+const archivos = require("../controllers/archivos");
+const carpetas = require("../controllers/carpetas");
+const pedidos = require("../controllers/pedidos");
 
 module.exports = function(){
 
@@ -97,6 +103,47 @@ module.exports = function(){
     router.delete('/eliminar-gasto/:id', gastos.eliminarGasto);
     router.post('/agregar-gasto', gastos.agregarGasto);
 
+    // ventas
+    router.get('/ventas', ventas.obtenerVentas);
+    router.get('/venta/:id', ventas.obtenerVenta);
+    router.put('/actualizar-venta/:id', ventas.actualizarVenta);
+    router.delete('/eliminar-venta/:id', ventas.eliminarVenta);
+    router.post('/agregar-venta', ventas.agregarVenta);
+
+    // lotes
+    router.get('/lotes', lotes.obtenerLotes);
+    router.get('/lote/:id', lotes.obtenerLote);
+    router.put('/actualizar-lote/:id', lotes.actualizarLote);
+    router.delete('/eliminar-lote/:id', lotes.eliminarLote);
+    router.post('/agregar-lote', lotes.agregarLote);
+
+    // ordenes proveedor
+    router.get('/ordenes', ordenes.obtenerOrdenes);
+    router.get('/orden/:id', ordenes.obtenerOrden);
+    router.put('/actualizar-orden/:id', ordenes.actualizarOrden);
+    router.delete('/eliminar-orden/:id', ordenes.eliminarOrden);
+    router.post('/agregar-orden', ordenes.agregarOrden);
+
+    // archivos
+    router.get('/archivos', archivos.obtenerArchivos);
+    router.get('/archivo/:id', archivos.obtenerArchivo);
+    router.put('/actualizar-archivo/:id', archivos.actualizarArchivo);
+    router.delete('/eliminar-archivo/:id', archivos.eliminarArchivo);
+    router.post('/agregar-archivo', archivos.agregarArchivo);
+
+    // carpetas
+    router.get('/carpetas', carpetas.obtenerCarpetas);
+    router.get('/carpeta/:id', carpetas.obtenerCarpeta);
+    router.put('/actualizar-carpeta/:id', carpetas.actualizarCarpeta);
+    router.delete('/eliminar-carpeta/:id', carpetas.eliminarCarpeta);
+    router.post('/agregar-carpeta', carpetas.agregarCarpeta);
+
+    // pedidos
+    router.get('/pedidos', pedidos.obtenerPedidos);
+    router.get('/pedido/:id', pedidos.obtenerPedido);
+    router.put('/actualizar-pedido/:id', pedidos.actualizarPedido);
+    router.delete('/eliminar-pedido/:id', pedidos.eliminarPedido);
+    router.post('/agregar-pedido', pedidos.agregarPedido);
 
     return router;
 }
