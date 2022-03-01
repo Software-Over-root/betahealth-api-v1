@@ -11,7 +11,7 @@ const categoriaSchema = new Schema(
         nombre: {
             type: String,
             required: true
-        },   
+        }  
     },
     {
         timestamps: true

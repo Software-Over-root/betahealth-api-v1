@@ -1,10 +1,9 @@
-const productosSchema = require("../models/productos");
+const productosSchema = require("../models/productos_proveedores");
 
 //Agregar producto
-exports.agregarProducto = async (req, res, next) => {
-    const { id_categoria, nombre, descripcion, unidad_medida, precio, cantidad, id_almacen } = req.body;
-    const nuevoProducto = productosSchema({ 
-        id_almacen,
+exports.agregarProductoProveedores = async (req, res, next) => {
+    const { id_categoria, nombre, descripcion, unidad_medida, precio, cantidad } = req.body;
+    const nuevoProducto = productosSchema({
         id_categoria, 
         nombre, 
         descripcion, 
@@ -21,7 +20,7 @@ exports.agregarProducto = async (req, res, next) => {
 }
 
 //Obtener productos
-exports.obtenerProducto = async (req, res, next) => {
+exports.obtenerProductoProveedores = async (req, res, next) => {
     productosSchema.find()
     .then( data =>{
         res.send({success: true, message:"Productos obtenido correctamente", data});
@@ -31,7 +30,7 @@ exports.obtenerProducto = async (req, res, next) => {
 }
 
 //Obtener productos
-exports.obtenerProductosCategoria = async (req, res, next) => {
+exports.obtenerProductosCategoriaProveedores = async (req, res, next) => {
     const {id} = req.params;
     productosSchema.find({"id_categoria": id})
     .then( data =>{
@@ -42,7 +41,7 @@ exports.obtenerProductosCategoria = async (req, res, next) => {
 }
 
 //Obtener un producto 
-exports.obtenerUnProducto = async (req, res, next)=>{
+exports.obtenerUnProductoProveedores = async (req, res, next)=>{
     const {id} = req.params;
     productosSchema.findById(id)
     .then (data =>{
@@ -53,7 +52,7 @@ exports.obtenerUnProducto = async (req, res, next)=>{
 }
 
 //Eliminar producto 
-exports.eliminarProducto = async (req, res, next)=>{
+exports.eliminarProductoProveedores = async (req, res, next)=>{
     const {id} = req.params;
     productosSchema.remove({_id : id})
     .then(data => {
@@ -65,17 +64,16 @@ exports.eliminarProducto = async (req, res, next)=>{
 }
 
 //actualizar producto
-exports.actualizarProducto = async (req, res, next)=>{
+exports.actualizarProductoProveedores = async (req, res, next)=>{
     const {id} = req.params;
-    const {id_categoria, nombre, descripcion, unidad_medida, precio, cantidad, id_almacen } = req.body
+    const {id_categoria, nombre, descripcion, unidad_medida, precio, cantidad } = req.body
     productosSchema.updateMany({_id:id}, { $set:{
         id_categoria, 
         nombre, 
         descripcion, 
         unidad_medida, 
         precio, 
-        cantidad, 
-        id_almacen 
+        cantidad
     }})
     .then(data =>{
         res.send({success:true , message:"Producto acutalizado correctamente", data});

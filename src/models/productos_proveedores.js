@@ -1,15 +1,10 @@
 const { Schema, model } = require("mongoose");
 
-const productosSchema = new Schema(
+const productosProveedoresSchema = new Schema(
     {
         id_categoria: {
             type: Schema.ObjectId,
-            ref: "categorias",
-            required: true
-        },
-        id_almacen: {
-            type: Schema.ObjectId,
-            ref: "almacenes",
+            ref: "categorias_proveedores",
             required: true
         },
         nombre: {
@@ -38,4 +33,4 @@ const productosSchema = new Schema(
     }
 );
 
-module.exports = model("productos", productosSchema);
+module.exports = model("productos_proveedores", productosProveedoresSchema);
