@@ -16,7 +16,7 @@ exports.agregarAlmacen = (req, res, next) => {
 
 // obtener todos los almacenes
 exports.obtenerAlmacenes = (req, res, next) => {
-    almacenSchema.find()
+    almacenSchema.find().sort("nombre")
     .then(data => {
         res.send({success: true, message:"Informacion obtenida correctamentee", data});
     }).catch(err => {
