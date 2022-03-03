@@ -23,6 +23,17 @@ exports.obtenerCarpetas = async (req, res, next)=>{
     });
 }
 
+//Obtener todas las carpetas de una ubicacion
+exports.obtenerCarpetasUbicacion = async (req, res, next)=>{
+    const {id} = req.params;
+    CarpetasSchema.find({"id_ubicacion": id})
+    .then(data =>{
+        res.send({success: true, message:"Informacion obtenida correctamente", data});
+    }).catch(err => {
+        res.send({success: false, message:"No se lograron obtener las carpetas", err});
+    });
+}
+
 //Obtener una carpeta
 exports.obtenerCarpeta = async (req, res, next)=>{
     const {id} = req.params;

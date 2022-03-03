@@ -156,6 +156,7 @@ module.exports = function(){
 
     // carpetas
     router.get('/carpetas', carpetas.obtenerCarpetas);
+    router.get('/carpetas-ubicacion/:id', carpetas.obtenerCarpetasUbicacion);
     router.get('/carpeta/:id', carpetas.obtenerCarpeta);
     router.put('/actualizar-carpeta/:id', carpetas.actualizarCarpeta);
     router.delete('/eliminar-carpeta/:id', carpetas.eliminarCarpeta);
