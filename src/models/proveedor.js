@@ -45,6 +45,10 @@ const ProveedorSchema = new Schema(
         divisa: {
             type: String,
             required: true
+        },
+        encargado: {
+            type: String,
+            required: true
         }
     },
     {

@@ -3,8 +3,34 @@ const ProveedorSchema = require("../models/proveedor");
 
 // agregar proveedor
 exports.agregarProveedor = (req, res, next) => {
-    const { descripcion_cuenta, tipo_proveedor, especificacion, rfc, domicilio, contacto, telefono, correo, numero_cuenta, banco, divisa } = req.body;
-    const nuevoProveedor = ProveedorSchema({ descripcion_cuenta, tipo_proveedor, especificacion, rfc, domicilio, contacto, telefono, correo, numero_cuenta, banco, divisa });
+    const { 
+        descripcion_cuenta, 
+        tipo_proveedor, 
+        especificacion, 
+        rfc, 
+        domicilio, 
+        contacto, 
+        telefono, 
+        correo, 
+        numero_cuenta, 
+        banco, 
+        divisa, 
+        encargado 
+    } = req.body;
+    const nuevoProveedor = ProveedorSchema({ 
+        descripcion_cuenta, 
+        tipo_proveedor, 
+        especificacion, 
+        rfc, 
+        domicilio, 
+        contacto, 
+        telefono, 
+        correo, 
+        numero_cuenta, 
+        banco, 
+        divisa, 
+        encargado 
+    });
     nuevoProveedor.save()
     .then(result => {
         res.send({success: true, message:"El proveedor fue agregado correctamente", type: result});
@@ -53,8 +79,34 @@ exports.eliminarProveedor = async (req, res, next) => {
 // actualizar proveedor
 exports.actualizarProveedor = async (req, res, next) => {
     const { id } = req.params;
-    const { descripcion_cuenta, tipo_proveedor, especificacion, rfc, domicilio, contacto, telefono, correo, numero_cuenta, banco, divisa } = req.body;
-    ProveedorSchema.updateOne({ _id: id }, { $set: { descripcion_cuenta, tipo_proveedor, especificacion, rfc, domicilio, contacto, telefono, correo, numero_cuenta, banco, divisa } })
+    const { 
+        descripcion_cuenta, 
+        tipo_proveedor, 
+        especificacion, 
+        rfc, 
+        domicilio, 
+        contacto, 
+        telefono, 
+        correo, 
+        numero_cuenta, 
+        banco, 
+        divisa,
+        encargado
+    } = req.body;
+    ProveedorSchema.updateOne({ _id: id }, { $set: { 
+        descripcion_cuenta, 
+        tipo_proveedor, 
+        especificacion, 
+        rfc, 
+        domicilio, 
+        contacto, 
+        telefono, 
+        correo, 
+        numero_cuenta, 
+        banco, 
+        divisa,
+        encargado
+    } })
     .then(data => {
         res.send({success: true, message:"Proveedor actualizado correctamente", data});
     })

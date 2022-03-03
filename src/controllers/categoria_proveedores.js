@@ -1,10 +1,10 @@
-const categoriaSchema = require("../models/categoria");
+const categoriaSchema = require("../models/categoria_proveedores");
 
 
 //Agregar categoria
-exports.agregarCategoria = (req, res, next) => {
-    const {nombre, id_almacen} = req.body;
-    const nuevaCategoria = categoriaSchema({nombre, id_almacen});
+exports.agregarCategoriaProveedor = (req, res, next) => {
+    const {nombre} = req.body;
+    const nuevaCategoria = categoriaSchema({nombre});
     nuevaCategoria.save()
     .then(data => {
         res.send({success: true, message:"La categoria fue agregada correctamente", data});
@@ -23,30 +23,20 @@ exports.obtenerCategorias = async (req, res, next)=>{
     });
 }
 
-//Obtener una categoria
-exports.obtenerUnaCategoria = async (req, res, next)=>{
+//Obtener todas las categorias
+exports.obtenerCategoriasProveedor = async (req, res, next)=>{
     const {id} = req.params;
-    categoriaSchema.findById(id)
+    categoriaSchema.find({"id_proveedor": id})
     .then(data =>{
-        res.send({success: true , message:"Se encontro la categoria", data});
-    }).catch(err =>{
+        res.send({success: true, message:"La categoria fue encontrada", data});
+    }).catch(err => {
         res.send({success: false, message:"No se encontro la categoria", err});
     });
 }
 
-//Obtener categorias por id de almacen
-exports.obtenerConAlmacenes = async (req, res, next)=>{
-    const {id} = req.params;
-    categoriaSchema.find({"id_almacen": id}).sort("nombre")
-    .then(data =>{
-        res.send({success: true , message:"Se encontro las categorias", data});
-    }).catch(err =>{
-        res.send({success: false, message:"No se encontraron las categorias", err});
-    });
-}
 
 //Eliminar categoria
-exports.eliminarCategoria = async (req, res, next) =>{
+exports.eliminarCategoriaProveedor = async (req, res, next) =>{
     const {id} = req.params;
     categoriaSchema.remove({_id : id})
     .then(data => {
@@ -57,7 +47,7 @@ exports.eliminarCategoria = async (req, res, next) =>{
 }
 
 //Actualizar categoria
-exports.actualizarCategoria = async (req, res, next) =>{
+exports.actualizarCategoriaProveedor = async (req, res, next) =>{
     const {id} = req.params;
     const {nombre} = req.body;
     categoriaSchema.updateOne({_id:id}, {$set:{nombre}})
