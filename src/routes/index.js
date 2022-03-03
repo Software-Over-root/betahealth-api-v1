@@ -72,6 +72,7 @@ module.exports = function(){
     router.put('/actualizar-usuario/:id',usuarios.actualizarUsuario);
     router.delete('/eliminar-usuario/:id', usuarios.eliminarUsuario);
     router.post('/agregar-usuario', usuarios.agregarUsuario);
+    router.get('/login', usuarios.login);
 
     //paquetes
     router.get('/paquetes', paquetes.obtenerPaquete);

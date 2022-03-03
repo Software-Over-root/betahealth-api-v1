@@ -57,3 +57,20 @@ exports.actualizarUsuario = async (req, res, next) =>{
     });
 
 }
+
+//login
+exports.login = async (req, res, next)=>{
+    const base64Credentials =  req.headers.authorization.split(' ')[1];
+    const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
+    const [username, password] = credentials.split(':');
+    usuariosSchema.find({correo: username, password})
+    .then(data => {
+        if (data.length === 0) {
+            res.send({success: false, message:"Usuario y/o contraseña incorrectas"});
+        } else {
+            res.send({success: true, message:"El usuario fue encontrado", data});
+        }
+    }).catch(err => {
+        res.send({success: false, message:"No se encontro el usuario", err});
+    });
+}
