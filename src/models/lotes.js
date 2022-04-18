@@ -18,6 +18,10 @@ const AlmacenesSchema = new Schema(
 
 const LotesSchema = new Schema(
     {
+        id_lote: {
+            type: String,
+            required: true
+        },
         id_producto: {
             type: String,
             required: true

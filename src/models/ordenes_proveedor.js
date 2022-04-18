@@ -18,12 +18,16 @@ const ProductosSchema = new Schema(
 
 const OrdenesSchema = new Schema(
     {
+        id_usuario: {
+            type: String,
+            required: true
+        },
         id_proveedor: {
             type: String,
             required: true
         },
-        id_usuario: {
-            type: String,
+        estado: {
+            type: Number,
             required: true
         },
         productos: [ProductosSchema]

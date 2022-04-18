@@ -1,4 +1,5 @@
 const categoriaSchema = require("../models/conexion_proveedor_categoria");
+const categoriaProveedoresSchema = require("../models/categoria_proveedores");
 const proveedoresSchema = require("../models/proveedor");
 
 
@@ -24,8 +25,8 @@ exports.obtenerCategorias = async (req, res, next)=>{
     });
 }
 
-//Obtener todas las categorias
-exports.obtenerProveedoresCategoria = async (req, res, next)=>{
+//Obtener todas los proveedores de una categoria
+exports.obtenerProveedoresCategoria = async (req, res, next) => {
     const {id} = req.params;
     let id_proveedores = [];
     categoriaSchema.find({"id_categoria": id})
@@ -47,6 +48,28 @@ exports.obtenerProveedoresCategoria = async (req, res, next)=>{
     });
 }
 
+//Obtener todas las categorias de un proveedor
+exports.obtenerCategoriasProveedorConexion = async (req, res, next)=>{
+    const {id} = req.params;
+    let id_categorias = [];
+    categoriaSchema.find({"id_proveedor": id})
+    .then(data => {
+        data.map(categoria => {
+            id_categorias.push(categoria.id_categoria);
+        })
+        categoriaProveedoresSchema.find({
+            '_id': { $in: id_categorias}
+        }, (err, docs) => {
+            if (err) {
+                res.send({success: false, message:"Error en encontrar los proveedores", err});
+            } else {
+                res.send({success: true, message:"Los porveedores fueron encontrados", data: docs});
+            }
+        })
+    }).catch(err => {
+        res.send({success: false, message:"No se encontraron proveedores", err});
+    });
+}
 
 //Eliminar categoria
 exports.eliminarCategoriaProveedor = async (req, res, next) =>{

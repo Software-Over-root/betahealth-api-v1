@@ -39,7 +39,6 @@ exports.agregarProveedor = (req, res, next) => {
     });
 }
 
-
 // obtener todos los proveedores
 exports.obtenerProveedores = (req, res, next) => {
     ProveedorSchema.find()
@@ -49,7 +48,6 @@ exports.obtenerProveedores = (req, res, next) => {
         res.send({success: false, message:"No se logro obtener los proveedores", type: err});
     });
 }
-
 
 // obtener un proveedor
 exports.obtenerProveedor = async (req, res, next) => {
@@ -62,7 +60,6 @@ exports.obtenerProveedor = async (req, res, next) => {
     });  
 }
 
-
 // eliminar proveedor
 exports.eliminarProveedor = async (req, res, next) => {
     const { id } = req.params;
@@ -74,7 +71,6 @@ exports.eliminarProveedor = async (req, res, next) => {
         res.send({success: false, message:"No se logro eliminar el proveedor", type: err});
     }); 
 }
-
 
 // actualizar proveedor
 exports.actualizarProveedor = async (req, res, next) => {
@@ -112,5 +108,16 @@ exports.actualizarProveedor = async (req, res, next) => {
     })
     .catch(error => {
         res.send({success: false, message:"No se logro actualizar el proveedor", type: err});
+    });
+}
+
+exports.obtenerProveedoresPorId = async (req, res, next) => {
+    ProveedorSchema.find({
+        _id: {$in: req.body.proveedores}
+    })
+    .then(data => {
+        res.send({success: true, message:"Proveedores obtenida correctamentee", data});
+    }).catch(err => {
+        res.send({success: false, message:"No se logro obtener los proveedores", type: err});
     });
 }

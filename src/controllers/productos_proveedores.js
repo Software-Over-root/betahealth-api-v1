@@ -40,6 +40,18 @@ exports.obtenerProductosCategoriaProveedores = async (req, res, next) => {
     })
 }
 
+//Obtener productos por ids
+exports.obtenerProductoIDs = async (req, res, next) => {
+    productosSchema.find({
+        _id: {$in: req.body.productos}
+    })
+    .then( data =>{
+        res.send({success: true, message:"Productos obtenido correctamente", data});
+    }).catch(err =>{
+        res.send({success: false, message:"No se encontro el producto", err});
+    })
+}
+
 //Obtener un producto 
 exports.obtenerUnProductoProveedores = async (req, res, next)=>{
     const {id} = req.params;

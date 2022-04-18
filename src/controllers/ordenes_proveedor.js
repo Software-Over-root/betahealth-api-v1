@@ -3,8 +3,8 @@ const OrdenesSchema = require("../models/ordenes_proveedor");
 
 //Agregar orden
 exports.agregarOrden = (req, res, next) => {
-    const { id_proveedor, id_usuario, productos } = req.body;
-    const nuevaOrden = OrdenesSchema({ id_proveedor, id_usuario, productos });
+    const { id_usuario, id_proveedor, productos, estado } = req.body;
+    const nuevaOrden = OrdenesSchema({ id_usuario, id_proveedor, productos, estado });
     nuevaOrden.save()
     .then(data => {
         res.send({success: true, message:"La orden fue agregada correctamente", data});
@@ -56,4 +56,17 @@ exports.actualizarOrden = async (req, res, next) =>{
         res.send({success:false, message:"No se logro actualizar la orden", err});
     });
 
+}
+
+//Obtener todas las ordenes
+exports.obtenerOrdenesPorEstatus = async (req, res, next)=>{
+    let estatus = req.params.estatus;
+    OrdenesSchema.find({
+        "estado": estatus
+    })
+    .then(data =>{
+        res.send({success: true, message:"Informacion obtenida correctamente", data});
+    }).catch(err => {
+        res.send({success: false, message:"No se lograron obtener las ordenes", err});
+    });
 }
