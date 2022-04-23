@@ -1,6 +1,7 @@
+// NOTE: Estos son las categorias externas que se encuentran solo en los almacenes foraneos.
 const { Schema, model } = require("mongoose");
 
-const categoriaSchema = new Schema(
+const categoriasExternasSchema = new Schema(
     {
         
         id_almacen: {
@@ -18,4 +19,4 @@ const categoriaSchema = new Schema(
     }
 );
 
-module.exports = model("categorias", categoriaSchema);
+module.exports = model("categorias_externas", categoriasExternasSchema);

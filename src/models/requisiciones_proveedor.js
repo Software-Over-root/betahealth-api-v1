@@ -1,25 +1,4 @@
-// NOTE: el id_producto puede ser tanto de un producto global como de un producto externo
 const { Schema, model } = require("mongoose");
-
-const AlmacenesSchema = new Schema(
-    {
-        _id: {
-            require: false
-        },
-        id_almacen: {
-            type: String,
-            required: true
-        },
-        cantidad:{
-            type: Number,
-            required: true
-        },
-        fecha:{
-            type: Date,
-            required: true
-        }  
-    }
-)
 
 // NOTE: es una copia del producto al que se le asigna el lote pero cuenta tambien con su identificador de producto
 const ProductoSchema = new Schema(
@@ -28,7 +7,8 @@ const ProductoSchema = new Schema(
             require: false
         },
         id_producto: {
-            type: String,
+            type: Schema.ObjectId,
+            ref: "productos_globales",
             required: true
         },
         nombre: {
@@ -42,26 +22,13 @@ const ProductoSchema = new Schema(
         unidad_medida: {
             type: String,
             required: true
-        }  
-    }
-)
-
-// NOTE: es una copia de la categoria del producto al que se le asigna el lote pero cuenta tambien con su identificador de categoria
-const CategoriaSchema = new Schema(
-    {
-        _id: {
-            require: false
         },
-        id_categoria: {
-            type: String,
-            required: true
-        },
-        nombre: {
-            type: String,
+        cantidad: {
+            type: Number,
             required: true
         }
     }
-)
+);
 
 // NOTE: es una copia del proveedor del producto del loper, pero cuenta con el identificador del proveedor
 const ProveedorSchema = new Schema(
@@ -70,7 +37,8 @@ const ProveedorSchema = new Schema(
             require: false
         },
         id_proveedor:{
-            type: String,
+            type: Schema.ObjectId,
+            ref: "proveedores",
             required: true
         },
         nombre_proveedor: {
@@ -122,32 +90,36 @@ const ProveedorSchema = new Schema(
             required: true
         }  
     }
-)
+);
 
-const LotesSchema = new Schema(
+// NOTE: Se genera un arreglo de datos de cada uno de los productos de cada provedor y categoria
+const DatosRequisicionSchema = new Schema(
     {
-        id_lote: {
-            type: String,
-            required: true
-        },
-        fecha:{
-            type: Date,
-            required: true
-        },
-        categoria: {
-            CategoriaSchema
-        },
-        producto: {
-            ProductoSchema
+        _id: {
+            require: false
         },
         proveedor: {
             ProveedorSchema
         },
-        almacenes: [AlmacenesSchema]
+        productos: [ProductoSchema]
+    }
+);
+
+const RequisicionesSchema = new Schema(
+    {
+        id_usuario: {
+            type: String,
+            required: true
+        },
+        estado: {
+            type: Number,
+            required: true
+        },
+        orden: [DatosRequisicionSchema]
     },
     {
         timestamps: true
     }
 );
 
-module.exports = model("lotes", LotesSchema);
+module.exports = model("requisiciones_proveedor", RequisicionesSchema);

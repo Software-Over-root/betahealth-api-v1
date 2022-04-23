@@ -1,3 +1,4 @@
+// Errores: 15.0.0
 const pacientesSchema = require("../models/pacientes");
 
 
@@ -73,9 +74,9 @@ exports.agregarPaciente = (req, res, next) => {
     const nuevoPaciente = pacientesSchema(data);
     nuevoPaciente.save()
     .then(data => {
-        res.send({success: true, message:"El paciente fue agregado correctamente", data});
+        res.status(200).send({success: true, message:"El paciente fue agregado correctamente", data});
     }).catch(err => {
-        res.send({success: false, message:"No se logro guardar el paciente", err});
+        res.status(400).send({success: false, message:"No se logro guardar el paciente", err, code:"15.0.0"});
     });
 }
 
@@ -84,9 +85,9 @@ exports.agregarPaciente = (req, res, next) => {
 exports.obtenerPacientes = (req, res, next) => {
     pacientesSchema.find()
     .then(data => {
-        res.send({success: true, message:"Informacion obtenida correctamentee", data});
+        res.status(200).send({success: true, message:"Informacion obtenida correctamentee", data});
     }).catch(err => {
-        res.send({success: false, message:"No se logro obtener los pacientes", err});
+        res.status(400).send({success: false, message:"No se logro obtener los pacientes", err, code:"15.1.0"});
     });
 }
 
@@ -96,9 +97,9 @@ exports.obtenerPaciente = async (req, res, next) => {
     const { id } = req.params;
     pacientesSchema.findById(id)
     .then(data => {
-        res.send({success: true, message:"Informacion obtenida correctamentee", data});
+        res.status(200).send({success: true, message:"Informacion obtenida correctamentee", data});
     }).catch(err => {
-        res.send({success: false, message:"No se logro obtener el paciente", err});
+        res.status(400).send({success: false, message:"No se logro obtener el paciente", err, code:"15.2.0"});
     });  
 }
 
@@ -108,10 +109,10 @@ exports.eliminarPaciente = async (req, res, next) => {
     const { id } = req.params;
     pacientesSchema.remove({ _id: id })
     .then(data => {
-        res.send({success: true, message:"Paciente eliminado correctamente", data});
+        res.status(200).send({success: true, message:"Paciente eliminado correctamente", data});
     })
     .catch(err => {
-        res.send({success: false, message:"No se logro eliminar el paciente", err});
+        res.status(400).send({success: false, message:"No se logro eliminar el paciente", err, code:"15.3.0"});
     }); 
 }
 
@@ -188,9 +189,9 @@ exports.actualizarPaciente = async (req, res, next) => {
     }
     pacientesSchema.updateOne({ _id: id }, { $set: data})
     .then(data => {
-        res.send({success: true, message:"Paciente actualizado correctamente", data});
+        res.status(200).send({success: true, message:"Paciente actualizado correctamente", data});
     })
     .catch(error => {
-        res.send({success: false, message:"No se logro actualizar el paciente", err});
+        res.status(400).send({success: false, message:"No se logro actualizar el paciente", err, code:"15.4.0"});
     });
 }

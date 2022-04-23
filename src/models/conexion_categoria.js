@@ -1,16 +1,20 @@
+// NOTE: Estas son las conexiones de las categorias globales con los proveedores y almacenes.
 const { Schema, model } = require("mongoose");
 
 const conexionCategria = new Schema(
     {
-        id_categoria: {
+        id_categoria_globales: {
             type: Schema.ObjectId,
-            ref: "categorias_proveedores",
+            ref: "categoria_globales",
             required: true
         },
         id_proveedor: {
             type: Schema.ObjectId,
-            ref: "proveedores",
-            required: true
+            ref: "proveedores"
+        },
+        id_almacen: {
+            type: Schema.ObjectId,
+            ref: "almacenes"
         }
     },
     {

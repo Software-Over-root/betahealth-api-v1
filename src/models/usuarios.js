@@ -18,10 +18,14 @@ const usuariosSchema = new Schema(
             type: Number,
             required: true
         }, 
+        cargo: {
+            type: Number,
+            required: true
+        }, 
         id_sucursal: {
             type: String,
             required: true
-        },    
+        },
     },
     {
         timestamps: true

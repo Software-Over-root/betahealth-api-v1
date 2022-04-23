@@ -1,3 +1,4 @@
+// Errores: 11.0.0
 const campaniasSchema = require("../models/campanias");
 
 // agregar almacen
@@ -27,9 +28,9 @@ exports.agregarCampania = (req, res, next) => {
     });
     nuevaCampania.save()
     .then(result => {
-        res.send({success: true, message:"La campaña fue creada exitosamente", type: result});
+        res.status(200).send({success: true, message:"La campaña fue creada exitosamente", type: result});
     }).catch(err => {
-        res.send({success: false, message:"No se logro crear la campaña", type: err});
+        res.status(400).send({success: false, message:"No se logro crear la campaña", type: err, code:"11.0.0"});
     });
 }
 
@@ -37,9 +38,9 @@ exports.agregarCampania = (req, res, next) => {
 exports.obtenerCampanias = (req, res, next) => {
     campaniasSchema.find()
     .then(data => {
-        res.send({success: true, message:"Informacion obtenida correctamentee", data});
+        res.status(200).send({success: true, message:"Informacion obtenida correctamentee", data});
     }).catch(err => {
-        res.send({success: false, message:"No se logro obtener los campañas", type: err});
+        res.status(400).send({success: false, message:"No se logro obtener los campañas", type: err, code:"11.1.0"});
     });
 }
 
@@ -49,9 +50,9 @@ exports.obtenerCampania = async (req, res, next) => {
     const { id } = req.params;
     campaniasSchema.findById(id)
     .then(data => {
-        res.send({success: true, message:"Informacion obtenida correctamentee", data});
+        res.status(200).send({success: true, message:"Informacion obtenida correctamentee", data});
     }).catch(err => {
-        res.send({success: false, message:"No se logro obtener la campaña", type: err});
+        res.status(400).send({success: false, message:"No se logro obtener la campaña", type: err, code:"11.2.0"});
     });  
 }
 
@@ -61,10 +62,10 @@ exports.eliminarCampania = async (req, res, next) => {
     const { id } = req.params;
     campaniasSchema.remove({ _id: id })
     .then(data => {
-        res.send({success: true, message:"Campaña eliminado correctamente", data});
+        res.status(200).send({success: true, message:"Campaña eliminado correctamente", data});
     })
     .catch(err => {
-        res.send({success: false, message:"No se logro eliminar la campaña", type: err});
+        res.status(400).send({success: false, message:"No se logro eliminar la campaña", type: err, code:"11.3.0"});
     }); 
 }
 
@@ -97,9 +98,9 @@ exports.actualizarCampaña = async (req, res, next) => {
         pacientes 
      } })
     .then(data => {
-        res.send({success: true, message:"Campaña actualizada correctamente", data});
+        res.status(200).send({success: true, message:"Campaña actualizada correctamente", data});
     })
     .catch(err => {
-        res.send({success: false, message:"No se logro actualizar la campaña", type: err});
+        res.status(200).send({success: false, message:"No se logro actualizar la campaña", type: err, code:"11.4.0"});
     });
 }

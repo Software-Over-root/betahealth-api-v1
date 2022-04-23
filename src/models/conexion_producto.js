@@ -2,15 +2,23 @@ const { Schema, model } = require("mongoose");
 
 const conexionProducto = new Schema(
     {
-        id_producto: {
+        id_categoria_global: {
             type: Schema.ObjectId,
-            ref: "productos_proveedores",
+            ref: "categoria_globales",
+            required: true
+        },
+        id_producto_global: {
+            type: Schema.ObjectId,
+            ref: "productos_globales",
             required: true
         },
         id_proveedor: {
             type: Schema.ObjectId,
-            ref: "proveedores",
-            required: true
+            ref: "proveedores"
+        },
+        id_almacen: {
+            type: Schema.ObjectId,
+            ref: "almacenes"
         }
     },
     {

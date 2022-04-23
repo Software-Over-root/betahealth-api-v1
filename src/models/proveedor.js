@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const ProveedorSchema = new Schema(
     {
-        descripcion_cuenta: {
+        nombre_proveedor: {
             type: String,
             required: true
         },
