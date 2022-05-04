@@ -4,7 +4,7 @@ const conexionProductoSchema = require("../models/conexion_producto");
 const productosGlobalesSchema = require("../models/productos_globales");
 
 
-//Obtener todas las conexiones de productos
+//Obtener todas las conexiones de productos 6.0.0
 exports.obtenerConexionesProductos = async (req, res, next)=>{
     conexionProductoSchema.find()
     .then(data => {
@@ -14,7 +14,7 @@ exports.obtenerConexionesProductos = async (req, res, next)=>{
     });
 }
 
-//Eliminar conexion producto
+//Eliminar conexion producto 6.1.0
 exports.eliminarConexionProductoProveedor = async (req, res, next) =>{
     const {id} = req.params;
     conexionProductoSchema.remove({_id : id})
@@ -25,7 +25,7 @@ exports.eliminarConexionProductoProveedor = async (req, res, next) =>{
     });
 }
 
-//Obtener conexion productos por ids
+//Obtener conexion productos por ids 6.2.0
 exports.obtenerConexionProductosIDs = async (req, res, next) => {
     conexionProductoSchema.find({
         _id: {$in: req.body.productos}
@@ -37,7 +37,7 @@ exports.obtenerConexionProductosIDs = async (req, res, next) => {
     })
 }
 
-//Obtener una conexion de producto global
+//Obtener una conexion de producto global 6.3.0
 exports.obtenerConexionProductoGlobal = async (req, res, next)=>{
     const {id} = req.params;
     conexionProductoSchema.findById(id)
@@ -52,7 +52,7 @@ exports.obtenerConexionProductoGlobal = async (req, res, next)=>{
 
 
 // ------------ consultas proveedores
-//Obtener todas las conexiones de productos de un proveedor
+//Obtener todas las conexiones de productos de un proveedor 6.4.0
 exports.obtenerConexionProductoProveedores = async (req, res, next)=>{
     const {id} = req.params;
     let id_productos = [];
@@ -75,7 +75,7 @@ exports.obtenerConexionProductoProveedores = async (req, res, next)=>{
     });
 }
 
-//Agregar conexion de producto a proveedor
+//Agregar conexion de producto a proveedor 6.5.0
 exports.agregarConexionProductoProveedor = (req, res, next) => {
     const { id_producto_global, id_categoria_global, id_proveedor } = req.body;
     const nuevoProducto = conexionProductoSchema({ id_producto_global, id_categoria_global, id_proveedor });
@@ -90,7 +90,7 @@ exports.agregarConexionProductoProveedor = (req, res, next) => {
 
 
 // ------------ consultas almacenes
-//Agregar conexion de producto a almacen
+//Agregar conexion de producto a almacen 6.6.0
 exports.agregarConexionProductoAlmacen = (req, res, next) => {
     const { id_producto_global, id_categoria_global, id_almacen } = req.body;
     const nuevoProducto = conexionProductoSchema({ id_producto_global, id_categoria_global, id_almacen });
@@ -102,7 +102,7 @@ exports.agregarConexionProductoAlmacen = (req, res, next) => {
     });
 }
 
-//Obtener conexion de productos de almacen
+//Obtener conexion de productos de almacen 6.7.0
 exports.obtenerConexionProductosAlmacen = async (req, res, next) => {
     const {id} = req.params;
     conexionProductoSchema.find({"id_almacen": id})
@@ -113,7 +113,7 @@ exports.obtenerConexionProductosAlmacen = async (req, res, next) => {
     })
 }
 
-//Obtener conexion de productos globales por id de categoria global
+//Obtener conexion de productos globales por id de categoria global 6.8.0
 exports.obtenerProductosGlobalesCategoria = async (req, res, next) => {
     const {id} = req.params;
     conexionProductoSchema.find({"id_categoria_global": id})

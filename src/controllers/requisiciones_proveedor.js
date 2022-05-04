@@ -12,10 +12,11 @@
 const RequisicionesProveedorSchema = require("../models/requisiciones_proveedor");
 
 
-//Agregar orden
-exports.agregarOrden = (req, res, next) => {
-    const { id_usuario, id_proveedor, orden, estado } = req.body;
-    const nuevaOrden = RequisicionesProveedorSchema({ id_usuario, id_proveedor, orden, estado });
+//Agregar requisicion
+exports.agregarRequisicion = (req, res, next) => {
+    const { id_usuario, productos, estado } = req.body;
+    console.log(productos);
+    const nuevaOrden = RequisicionesProveedorSchema({ id_usuario, productos, estado });
     nuevaOrden.save()
     .then(data => {
         res.status(200).send({success: true, message:"La orden fue agregada correctamente", data});
@@ -24,8 +25,8 @@ exports.agregarOrden = (req, res, next) => {
     });
 }
 
-//Obtener todas las ordenes
-exports.obtenerOrdenes = async (req, res, next)=>{
+//Obtener todas las requisiciones
+exports.obtenerRequisiciones = async (req, res, next)=>{
     RequisicionesProveedorSchema.find()
     .then(data =>{
         res.status(200).send({success: true, message:"Informacion obtenida correctamente", data});
@@ -34,8 +35,8 @@ exports.obtenerOrdenes = async (req, res, next)=>{
     });
 }
 
-//Obtener una orden
-exports.obtenerOrden = async (req, res, next)=>{
+//Obtener una requisicion
+exports.obtenerRequisicion = async (req, res, next)=>{
     const {id} = req.params;
     RequisicionesProveedorSchema.findById(id)
     .then(data =>{
@@ -45,8 +46,8 @@ exports.obtenerOrden = async (req, res, next)=>{
     });
 }
 
-//Eliminar orden
-exports.eliminarOrden = async (req, res, next) =>{
+//Eliminar requisicion
+exports.eliminarRequisicion = async (req, res, next) =>{
     const {id} = req.params;
     RequisicionesProveedorSchema.remove({_id : id})
     .then(data => {
@@ -56,21 +57,21 @@ exports.eliminarOrden = async (req, res, next) =>{
     });
 }
 
-//Actualizar orden
-exports.actualizarOrden = async (req, res, next) =>{
+//Actualizar requisicion
+exports.actualizarRequisicion = async (req, res, next) =>{
     const {id} = req.params;
-    const { id_proveedor, id_usuario, orden, estado }= req.body;
-    RequisicionesProveedorSchema.updateOne({_id:id}, {$set:{ id_proveedor, id_usuario, orden, estado }})
+    const { id_usuario, productos, estado } = req.body;
+    RequisicionesProveedorSchema.updateOne({_id:id}, {$set:{ id_usuario, productos, estado }})
     .then(data =>{
-        res.status(200).send({success:true , message:"Se actualizo la orden correctamente", data});
+        res.status(200).send({success: true , message:"Se actualizo la orden correctamente", data});
     }).catch(err=>{
-        res.status(400).send({success:false, message:"No se logro actualizar la orden", err, code:"14.4.0"});
+        res.status(400).send({success: false, message:"No se logro actualizar la orden", err, code:"14.4.0"});
     });
 
 }
 
-//Obtener todas las ordenes
-exports.obtenerOrdenesPorEstatus = async (req, res, next)=>{
+//Obtener todas las requisiciones
+exports.obtenerRequisicionesPorEstatus = async (req, res, next)=>{
     let estatus = req.params.estatus;
     RequisicionesProveedorSchema.find({
         "estado": estatus

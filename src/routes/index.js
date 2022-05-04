@@ -120,7 +120,10 @@ module.exports = function(){
         router.get('/provedores-categorias-conexion/:id', conexion_categoria.obtenerCategoriasProveedorConexion);
         // conexion categoria almacen
         router.post('/agregar-categoria-conexion-almacen', conexion_categoria.agregarConexionCategoriaAlmacen);
-        router.get('/categorias-conexion-almacenes/:id', conexion_categoria.obtenerConexionCategoriasAlmacen);
+        router.get('/categorias-conexion-almacenes/:id', 
+            conexion_categoria.obtenerConexionCategoriasAlmacen, 
+            categoria_globales.obtenerCategoriasGlobalesIDs
+        );
         router.get('/categoria-conexion-almacen/:id', conexion_categoria.obtenerConexionCategoriaAlmacen);
 
     //conexion productos con proveedores
@@ -154,12 +157,12 @@ module.exports = function(){
     router.post('/agregar-multiples-lotes', lotes.agregarMultiplesLotes);
 
     // requisiciones a proveedor
-    router.get('/requisiciones', requisiciones_proveedor.obtenerOrdenes);
-    router.get('/requisiciones-estatus/:estatus', requisiciones_proveedor.obtenerOrdenesPorEstatus);
-    router.get('/requisicion/:id', requisiciones_proveedor.obtenerOrden);
-    router.put('/actualizar-requisicion/:id', requisiciones_proveedor.actualizarOrden);
-    router.delete('/eliminar-requisicion/:id', requisiciones_proveedor.eliminarOrden);
-    router.post('/agregar-requisicion', requisiciones_proveedor.agregarOrden);
+    router.get('/requisiciones', requisiciones_proveedor.obtenerRequisiciones);
+    router.get('/requisiciones-estatus/:estatus', requisiciones_proveedor.obtenerRequisicionesPorEstatus);
+    router.get('/requisicion/:id', requisiciones_proveedor.obtenerRequisicion);
+    router.put('/actualizar-requisicion/:id', requisiciones_proveedor.actualizarRequisicion);
+    router.delete('/eliminar-requisicion/:id', requisiciones_proveedor.eliminarRequisicion);
+    router.post('/agregar-requisicion', requisiciones_proveedor.agregarRequisicion);
 
     //categoria gastos
     router.get('/categorias-gastos', categoria_gastos.obtenerCatGastos);

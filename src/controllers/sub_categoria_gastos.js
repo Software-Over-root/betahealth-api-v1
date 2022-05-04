@@ -4,8 +4,8 @@ const subCategoriaGSchema = require("../models/sub_categoria_gastos");
 
 //Agregar sub_categoria
 exports.agregarSubCatGas = (req, res, next) => {
-    const {nombre,id_categoria} = req.body;
-    const nuevaSubCatGas = subCategoriaGSchema({nombre,id_categoria});
+    const {nombre, id_categoria_gasto} = req.body;
+    const nuevaSubCatGas = subCategoriaGSchema({nombre, id_categoria_gasto});
     nuevaSubCatGas.save()
     .then(data => {
         res.status(200).send({success: true, message:"La sub categoria gastos fue agregada correctamente", data});
@@ -49,8 +49,8 @@ exports.eliminarSubCatGas = async (req, res, next) =>{
 //Actualizar sub_categoria
 exports.actualizarSubCatGas = async (req, res, next) =>{
     const {id} = req.params;
-    const {nombre, id_categoria}= req.body;
-    subCategoriaGSchema.updateOne({_id:id}, {$set:{nombre, id_categoria}})
+    const {nombre, id_categoria_gasto}= req.body;
+    subCategoriaGSchema.updateOne({_id:id}, {$set:{nombre, id_categoria_gasto}})
     .then(data =>{
         res.status(200).send({success:true , message:"Se actualizo la sub categoria gastos correctamente", data});
     }).catch(err=>{

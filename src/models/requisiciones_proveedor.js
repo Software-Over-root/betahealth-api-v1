@@ -98,10 +98,8 @@ const DatosRequisicionSchema = new Schema(
         _id: {
             require: false
         },
-        proveedor: {
-            ProveedorSchema
-        },
-        productos: [ProductoSchema]
+        proveedor: [ProveedorSchema],
+        producto: [ProductoSchema]
     }
 );
 
@@ -115,7 +113,7 @@ const RequisicionesSchema = new Schema(
             type: Number,
             required: true
         },
-        orden: [DatosRequisicionSchema]
+        productos: [DatosRequisicionSchema]
     },
     {
         timestamps: true

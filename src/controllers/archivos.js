@@ -3,8 +3,8 @@ const ArchivosSchema = require("../models/archivos");
 
 //Agregar archivo
 exports.agregarArchivo = (req, res, next) => {
-    const { nombre, url_archivo, id_ubicacion, modificaciones } = req.body;
-    const nuevoArchivo = ArchivosSchema({ nombre, url_archivo, id_ubicacion, modificaciones });
+    const { nombre, archivo, tipo_archivo, id_ubicacion, modificaciones } = req.body;
+    const nuevoArchivo = ArchivosSchema({ nombre, archivo, tipo_archivo, id_ubicacion, modificaciones });
     nuevoArchivo.save()
     .then(data => {
         res.status(200).send({success: true, message:"El archivo fue agregado correctamente", data});
@@ -48,8 +48,8 @@ exports.eliminarArchivo = async (req, res, next) =>{
 //Actualizar archivo
 exports.actualizarArchivo = async (req, res, next) =>{
     const {id} = req.params;
-    const { nombre, url_archivo, id_ubicacion, modificaciones }= req.body;
-    ArchivosSchema.updateOne({_id:id}, {$set:{ nombre, url_archivo, id_ubicacion, modificaciones }})
+    const { nombre, archivo, tipo_archivo, id_ubicacion, modificaciones }= req.body;
+    ArchivosSchema.updateOne({_id:id}, {$set:{ nombre, archivo, tipo_archivo, id_ubicacion, modificaciones }})
     .then(data =>{
         res.status(200).send({success:true , message:"Se actualizo el archivo correctamente", data});
     }).catch(err=>{

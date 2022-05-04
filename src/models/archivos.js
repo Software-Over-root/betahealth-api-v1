@@ -6,7 +6,8 @@ const ModificacionesSchema = new Schema(
             require: false
         },
         id_usuario: {
-            type: String,
+            type: Schema.ObjectId,
+            ref: "usuarios",
             required: true
         },
         fecha:{
@@ -22,12 +23,17 @@ const ArchivosSchema = new Schema(
             type: String,
             required: true
         },
-        url_archivo: {
+        archivo: {
+            type: String,
+            required: true
+        },
+        tipo_archivo: {
             type: String,
             required: true
         },
         id_ubicacion: {
-            type: String,
+            type: Schema.ObjectId,
+            ref: "carpetas",
             required: true
         },
         modificaciones: [ModificacionesSchema]

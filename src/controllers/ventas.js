@@ -14,7 +14,6 @@ exports.agregarVenta = (req, res, next) => {
     });
 }
 
-
 // obtener todas las ventas
 exports.obtenerVentas = (req, res, next) => {
     VentasSchema.find()
@@ -24,7 +23,6 @@ exports.obtenerVentas = (req, res, next) => {
         res.status(400).send({success: false, message:"No se lograron obtener las ventas", type: err, code:"18.1.0"});
     });
 }
-
 
 // obtener una venta
 exports.obtenerVenta = async (req, res, next) => {
@@ -37,7 +35,6 @@ exports.obtenerVenta = async (req, res, next) => {
     });  
 }
 
-
 // eliminar venta
 exports.eliminarVenta = async (req, res, next) => {
     const { id } = req.params;
@@ -49,7 +46,6 @@ exports.eliminarVenta = async (req, res, next) => {
         res.status(400).send({success: false, message:"No se logro eliminar la venta", type: err, code:"18.3.0"});
     }); 
 }
-
 
 // actualizar venta
 exports.actualizarVenta = async (req, res, next) => {

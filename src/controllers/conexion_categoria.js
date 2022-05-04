@@ -106,7 +106,8 @@ exports.obtenerConexionCategoriasAlmacen = async (req, res, next) => {
     const {id} = req.params;
     conexionCategriaSchema.find({"id_almacen": id})
     .then(data =>{
-        res.status(200).send({success: true, message:"Las categorias furon encontradas", data});
+        req.body.categorias = data;
+        next();
     }).catch(err => {
         res.status(400).send({success: false, message:"No se encontraron las categorias", err, code:"5.6.0"});
     });

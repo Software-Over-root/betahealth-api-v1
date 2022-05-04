@@ -23,9 +23,9 @@ exports.agregarProductoExterno = async (req, res, next) => {
 //Obtener productos externos
 exports.obtenerProductosExterno = async (req, res, next) => {
     productosExternosSchema.find()
-    .then( data =>{
+    .then( data => {
         res.status(200).send({success: true, message:"Productos obtenido correctamente", data});
-    }).catch(err =>{
+    }).catch(err => {
         res.status(400).send({success: false, message:"No se encontro el producto", err, code:"3.1.0"});
     })
 }
@@ -48,9 +48,11 @@ exports.obtenerProductosExternosCategoria = async (req, res, next) => {
     productosExternosSchema.find({"id_categoria_externa": id})
     .then( data =>{
         res.status(200).send({success: true, message:"Productos obtenido correctamente", data});
+
     }).catch(err =>{
         res.status(400).send({success: false, message:"No se encontro el producto", err, code:"3.3.0"});
     })
+
 }
 
 //Obtener un producto externo

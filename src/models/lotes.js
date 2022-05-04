@@ -1,4 +1,4 @@
-// NOTE: el id_producto puede ser tanto de un producto global como de un producto externo
+// NOTE: el id_producto puede ser tanto de un producto global como de un producto externo.
 const { Schema, model } = require("mongoose");
 
 const AlmacenesSchema = new Schema(
@@ -7,7 +7,8 @@ const AlmacenesSchema = new Schema(
             require: false
         },
         id_almacen: {
-            type: String,
+            type: Schema.ObjectId,
+            ref: "almacenes",
             required: true
         },
         cantidad:{
@@ -21,7 +22,8 @@ const AlmacenesSchema = new Schema(
     }
 )
 
-// NOTE: es una copia del producto al que se le asigna el lote pero cuenta tambien con su identificador de producto
+// NOTE: es una copia del producto al que se le asigna el lote pero cuenta tambien con su identificador de producto.
+// NOTE: el id_producto puede ser de un producto global o de un producto externo.
 const ProductoSchema = new Schema(
     {
         _id: {
@@ -46,7 +48,8 @@ const ProductoSchema = new Schema(
     }
 )
 
-// NOTE: es una copia de la categoria del producto al que se le asigna el lote pero cuenta tambien con su identificador de categoria
+// NOTE: es una copia de la categoria del producto al que se le asigna el lote pero cuenta tambien con su identificador de categoria.
+// NOTE: el id_categoria puede ser de una categoria global o de una categoria externa.
 const CategoriaSchema = new Schema(
     {
         _id: {
@@ -63,7 +66,8 @@ const CategoriaSchema = new Schema(
     }
 )
 
-// NOTE: es una copia del proveedor del producto del loper, pero cuenta con el identificador del proveedor
+// NOTE: es una copia del proveedor del producto del loper, pero cuenta con el identificador del proveedor.
+// NOTE: si es un producto externo la informacion del proveedor no contara con identificadro y posiblemente sin otros datos.
 const ProveedorSchema = new Schema(
     {
         _id: {
@@ -71,7 +75,6 @@ const ProveedorSchema = new Schema(
         },
         id_proveedor:{
             type: String,
-            required: true
         },
         nombre_proveedor: {
             type: String,
@@ -134,15 +137,9 @@ const LotesSchema = new Schema(
             type: Date,
             required: true
         },
-        categoria: {
-            CategoriaSchema
-        },
-        producto: {
-            ProductoSchema
-        },
-        proveedor: {
-            ProveedorSchema
-        },
+        categoria: [CategoriaSchema],
+        producto: [ProductoSchema],
+        proveedor: [ProveedorSchema],
         almacenes: [AlmacenesSchema]
     },
     {
