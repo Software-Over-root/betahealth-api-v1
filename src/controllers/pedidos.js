@@ -1,3 +1,4 @@
+// NOTE: Pedisdos es lo mismo que requisiciones, no se usa este controlador
 const PedidosSchema = require("../models/pedidos");
 
 

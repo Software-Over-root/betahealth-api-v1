@@ -6,8 +6,9 @@ const subCategoriaGSchema = new Schema(
             type: String,
             required: true
         },
-        id_categoria: {
-            type: String,
+        id_categoria_gasto: {
+            type: Schema.ObjectId,
+            ref: "categoria_gastos",
             required: true
         }   
     },

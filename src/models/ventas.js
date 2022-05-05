@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-//FIXME: parametro de total?, parametros con int y float?
 
 const NotasSchema = new Schema(
     {

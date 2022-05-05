@@ -6,7 +6,8 @@ const ModificacionesSchema = new Schema(
             require: false
         },
         id_usuario: {
-            type: String,
+            type: Schema.ObjectId,
+            ref: "usuarios",
             required: true
         },
         fecha:{

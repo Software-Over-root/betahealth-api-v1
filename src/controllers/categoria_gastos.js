@@ -1,3 +1,4 @@
+// Errores: 9.0.0
 const catGastosSchema = require("../models/categoria_gastos");
 
 
@@ -7,9 +8,9 @@ exports.agregarCatGastos = (req, res, next) => {
     const nuevaCategoriaG = catGastosSchema({nombre});
     nuevaCategoriaG.save()
     .then(data => {
-        res.send({success: true, message:"La categoria gastos fue agregada correctamente", data});
+        res.status(200).send({success: true, message:"La categoria gastos fue agregada correctamente", data});
     }).catch((err) => {
-        res.send({success: false, message:"No se logro guardar la categoria gastos", err});
+        res.status(400).send({success: false, message:"No se logro guardar la categoria gastos", err, code:"9.0.0"});
     });
 }
 
@@ -17,9 +18,9 @@ exports.agregarCatGastos = (req, res, next) => {
 exports.obtenerCatGastos = async (req, res, next)=>{
     catGastosSchema.find()
     .then(data =>{
-        res.send({success: true, message:"La categoria gastos fue encontrada", data});
+        res.status(200).send({success: true, message:"La categoria gastos fue encontrada", data});
     }).catch(err => {
-        res.send({success: false, message:"No se encontro la categoria gastos", err});
+        res.status(400).send({success: false, message:"No se encontro la categoria gastos", err, code:"9.1.0"});
     });
 }
 
@@ -28,9 +29,9 @@ exports.obtenerUnaCatGastos = async (req, res, next)=>{
     const {id} = req.params;
     catGastosSchema.findById(id)
     .then(data =>{
-        res.send({success: true , message:"Se encontro la categoria gastos", data});
+        res.status(200).send({success: true , message:"Se encontro la categoria gastos", data});
     }).catch(err =>{
-        res.send({success: false, message:"No se encontro la categoria gastos", err});
+        res.status(400).send({success: false, message:"No se encontro la categoria gastos", err, code:"9.2.0"});
     });
 }
 
@@ -39,9 +40,9 @@ exports.eliminarCatGastos = async (req, res, next) =>{
     const {id} = req.params;
     catGastosSchema.remove({_id : id})
     .then(data => {
-        res.send({success: true, message:"La categoria gastos fue eliminada correctamente", data});
+        res.status(200).send({success: true, message:"La categoria gastos fue eliminada correctamente", data});
     }).catch(err =>{
-        res.send({success:false , message:"No se logro eliminar la categoria gastos", err});
+        res.status(400).send({success:false , message:"No se logro eliminar la categoria gastos", err, code:"9.3.0"});
     });
 }
 
@@ -51,9 +52,9 @@ exports.actualizarCatGastos = async (req, res, next) =>{
     const {nombre}= req.body;
     catGastosSchema.updateOne({_id:id}, {$set:{nombre}})
     .then(data =>{
-        res.send({success:true , message:"Se actualizo la categoria gastos correctamente", data});
+        res.status(200).send({success:true , message:"Se actualizo la categoria gastos correctamente", data});
     }).catch(err=>{
-        res.send({success:false, message:"No se logro actualizar la categoria gastos", err});
+        res.status(400).send({success:false, message:"No se logro actualizar la categoria gastos", err, code:"9.4.0"});
     });
 
 }

@@ -7,7 +7,7 @@ const GastosSchema = new Schema(
             required: true
         },
         cantidad: {
-            type: String,
+            type: Number,
             required: true
         },
         descripcion: {
@@ -23,11 +23,13 @@ const GastosSchema = new Schema(
             required: true
         },
         id_subcategoria: {
-            type: String,
+            type: Schema.ObjectId,
+            ref: "sub_categoria_gastos",
             required: true
         },
         id_usuario: {
-            type: String,
+            type: Schema.ObjectId,
+            ref: "usuarios",
             required: true
         }
     },

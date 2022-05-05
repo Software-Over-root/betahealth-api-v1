@@ -1,10 +1,16 @@
+// NOTE: Estos son los productos externos que se encuentran solo en los almacenes foraneos.
 const { Schema, model } = require("mongoose");
 
-const productosProveedoresSchema = new Schema(
+const productosExternosSchema = new Schema(
     {
-        id_categoria: {
+        id_categoria_externa: {
             type: Schema.ObjectId,
-            ref: "categorias_proveedores",
+            ref: "categorias_externas",
+            required: true
+        },
+        id_almacen: {
+            type: Schema.ObjectId,
+            ref: "almacenes",
             required: true
         },
         nombre: {
@@ -18,14 +24,6 @@ const productosProveedoresSchema = new Schema(
         unidad_medida: {
             type: String,
             required: true
-        },
-        precio: {
-            type: Number,
-            required: true
-        },
-        cantidad: {
-            type: Number,
-            required: true
         }
     },
     {
@@ -33,4 +31,4 @@ const productosProveedoresSchema = new Schema(
     }
 );
 
-module.exports = model("productos_proveedores", productosProveedoresSchema);
+module.exports = model("productos_externos", productosExternosSchema);
