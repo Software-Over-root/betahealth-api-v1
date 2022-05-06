@@ -62,7 +62,29 @@ const carpetas = require("../controllers/carpetas"); //(errores 19.0.0)
 const archivos = require("../controllers/archivos"); //(errores 20.0.0)
 const users = require("../controllers/Users"); //IDEA: solo se usa para el inicio
 
+
+
+// inicio de controladores pagina web
+const ubicaciones = require("../controllers/Web/ubicaciones"); //(errores 21.0.0)
+const contactos = require("../controllers/Web/contacto"); //(errores 22.0.0)
+
 module.exports = function(){
+    // inicio de rutas pagina web
+    // ubicaciones
+    router.get('/ubicaciones', ubicaciones.obtenerUbicaciones);
+    router.get('/ubicacion/:id', ubicaciones.obtenerUnaUbicacion);
+    router.put('/actualizar-ubicacion/:id',ubicaciones.actualizarUbicacion);
+    router.delete('/eliminar-ubicacion/:id', ubicaciones.eliminarUbicacion);
+    router.post('/agregar-ubicacion', ubicaciones.agregarUbicacion);
+
+    // contacto
+    router.get('/contactos', contactos.obtenerContactos);
+    router.get('/contacto/:id', contactos.obtenerUnContacto);
+    router.put('/actualizar-contacto/:id',contactos.actualizarContacto);
+    router.delete('/eliminar-contacto/:id', contactos.eliminarContacto);
+    router.post('/agregar-contacto', contactos.agregarContacto);
+
+
     router.get('/', users.holaMundo);
 
     //usuarios
