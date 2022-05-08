@@ -67,9 +67,17 @@ const users = require("../controllers/Users"); //IDEA: solo se usa para el inici
 // inicio de controladores pagina web
 const ubicaciones = require("../controllers/Web/ubicaciones"); //(errores 21.0.0)
 const contactos = require("../controllers/Web/contacto"); //(errores 22.0.0)
+const contadores = require("../controllers/Web/contadores"); //(errores 23.0.0)
+const equipo = require("../controllers/Web/equipo"); //(errores 24.0.0)
+const eventos = require("../controllers/Web/eventos"); //(errores 25.0.0)
+const fotos = require("../controllers/Web/fotos"); //(errores 26.0.0)
+const preguntas_frecuentes = require("../controllers/Web/preguntas_frecuentes"); //(errores 27.0.0)
+const productos = require("../controllers/Web/productos"); //(errores 28.0.0)
+const testimoniales = require("../controllers/Web/testimoniales"); //(errores 29.0.0)
 
 module.exports = function(){
     // inicio de rutas pagina web
+
     // ubicaciones
     router.get('/ubicaciones', ubicaciones.obtenerUbicaciones);
     router.get('/ubicacion/:id', ubicaciones.obtenerUnaUbicacion);
@@ -83,6 +91,55 @@ module.exports = function(){
     router.put('/actualizar-contacto/:id',contactos.actualizarContacto);
     router.delete('/eliminar-contacto/:id', contactos.eliminarContacto);
     router.post('/agregar-contacto', contactos.agregarContacto);
+
+    // contadores
+    router.get('/contadores', contadores.obtenerContadores);
+    router.get('/contador/:id', contadores.obtenerUnContador);
+    router.put('/actualizar-contador/:id',contadores.actualizarContador);
+    router.delete('/eliminar-contador/:id', contadores.eliminarContador);
+    router.post('/agregar-contador', contadores.agregarContador);
+
+    // equipo
+    router.get('/equipos', equipo.obtenerEquipos);
+    router.get('/equipo/:id', equipo.obtenerUnEquipo);
+    router.put('/actualizar-equipo/:id',equipo.actualizarEquipo);
+    router.delete('/eliminar-equipo/:id', equipo.eliminarEquipo);
+    router.post('/agregar-equipo', equipo.agregarEquipo);
+
+    // eventos
+    router.get('/eventos', eventos.obtenerEventos);
+    router.get('/evento/:id', eventos.obtenerUnEvento);
+    router.put('/actualizar-evento/:id',eventos.actualizarEvento);
+    router.delete('/eliminar-evento/:id', eventos.eliminarEvento);
+    router.post('/agregar-evento', eventos.agregarEvento);
+
+    // fotos
+    router.get('/fotos', fotos.obtenerFotos);
+    router.get('/foto/:id', fotos.obtenerUnaFoto);
+    router.put('/actualizar-foto/:id',fotos.actualizarFoto);
+    router.delete('/eliminar-foto/:id', fotos.eliminarFoto);
+    router.post('/agregar-foto', fotos.agregarFoto);
+
+    // preguntas_frecuentes
+    router.get('/preguntas', preguntas_frecuentes.obtenerPregunta);
+    router.get('/pregunta/:id', preguntas_frecuentes.obtenerUnaPregunta);
+    router.put('/actualizar-pregunta/:id',preguntas_frecuentes.actualizarPregunta);
+    router.delete('/eliminar-pregunta/:id', preguntas_frecuentes.eliminarPregunta);
+    router.post('/agregar-pregunta', preguntas_frecuentes.agregarPregunta);
+
+    // productos
+    router.get('/productos', productos.obtenerProductos);
+    router.get('/producto/:id', productos.obtenerUnProducto);
+    router.put('/actualizar-producto/:id',productos.actualizarProducto);
+    router.delete('/eliminar-producto/:id', productos.eliminarProducto);
+    router.post('/agregar-producto', productos.agregarProducto);
+
+    // testimoniales
+    router.get('/testimoniales', testimoniales.obtenerTestimoniales);
+    router.get('/testimonial/:id', testimoniales.obtenerUnTestimonial);
+    router.put('/actualizar-testimonial/:id',testimoniales.actualizarTestimonial);
+    router.delete('/eliminar-testimonial/:id', testimoniales.eliminarTestimonial);
+    router.post('/agregar-testimonial', testimoniales.agregarTestimonial);
 
 
     router.get('/', users.holaMundo);
