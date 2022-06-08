@@ -58,3 +58,17 @@ exports.actualizarUsuario = async (req, res, next) =>{
     });
 
 }
+
+// Login de usuario
+exports.loginUsiario = (req, res, next) => {
+    const {correo, password} = req.body;
+    usuariosSchema.find({
+        correo: {$in: correo},
+        password: {$in: password},
+    })
+    .then(data =>{
+        res.status(200).send({success: true , message:"El usuarios fue encontrado", data});
+    }).catch(err =>{
+        res.status(400).send({success: false, message:"No se encontro el usuarios", err, code:"1.5.0"});
+    });
+}

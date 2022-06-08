@@ -150,6 +150,7 @@ module.exports = function(){
     router.put('/actualizar-usuario/:id',usuarios.actualizarUsuario);
     router.delete('/eliminar-usuario/:id', usuarios.eliminarUsuario);
     router.post('/agregar-usuario', usuarios.agregarUsuario);
+    router.post('/login-web', usuarios.loginUsiario);
 
     // almacenes
     router.get('/almacenes', almacen.obtenerAlmacenes);
