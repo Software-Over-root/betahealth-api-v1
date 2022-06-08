@@ -3,8 +3,8 @@ const contactoSchema = require("../../models/Web/contacto");
 
 //Agregar contacto
 exports.agregarContacto = (req, res, next) => {
-    const {nombre, telefono, e_mail, mensaje, asunto} = req.body;
-    const nuevaUbicacion = contactoSchema({nombre, telefono, e_mail, mensaje, asunto});
+    const {nombre, telefono, e_mail, mensaje, ciudad, estado} = req.body;
+    const nuevaUbicacion = contactoSchema({nombre, telefono, e_mail, mensaje, ciudad, estado});
     nuevaUbicacion.save()
     .then(data => {
         res.status(200).send({success: true, message:"El contacto fue agregado correctamente", data});
@@ -48,8 +48,8 @@ exports.eliminarContacto = async (req, res, next) =>{
 //Actualizar contactos
 exports.actualizarContacto = async (req, res, next) =>{
     const {id} = req.params;
-    const {nombre, telefono, e_mail, mensaje, asunto}= req.body;
-    contactoSchema.updateOne({_id:id}, {$set:{nombre, telefono, e_mail, mensaje, asunto}})
+    const {nombre, telefono, e_mail, mensaje, ciudad, estado}= req.body;
+    contactoSchema.updateOne({_id:id}, {$set:{nombre, telefono, e_mail, mensaje, ciudad, estado}})
     .then(data =>{
         res.status(200).send({success:true , message:"Se actualizó el contacto correctamente", data});
     }).catch(err=>{

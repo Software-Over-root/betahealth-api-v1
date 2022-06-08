@@ -18,7 +18,11 @@ const ContactoSchema = new Schema(
             type: String,
             required: true
         },
-        asunto: {
+        ciudad: {
+            type: String,
+            required: true
+        },
+        estado: {
             type: String,
             required: true
         },
