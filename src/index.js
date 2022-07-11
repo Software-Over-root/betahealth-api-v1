@@ -1,5 +1,5 @@
 const express = require("express");
-const routes = require("./src/routes");
+const routes = require("./routes");
 const bodyParser = require('body-parser');
 
 const morgan = require('morgan');
@@ -14,7 +14,7 @@ const http = require('http');
 const https = require('https');
 const fs = require('fs');
 require('dotenv').config();
-require("./src/database/database");
+require("./database/database");
 
 
 

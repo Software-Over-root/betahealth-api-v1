@@ -41,10 +41,15 @@ exports.obtenerConexionProductosIDs = async (req, res, next) => {
 exports.obtenerConexionProductoGlobal = async (req, res, next)=>{
     const {id} = req.params;
     conexionProductoSchema.findById(id)
-    .then (data =>{
-        res.status(200).send({success: true, message:"Producto obtenido correctamente", data});
-    }).catch(err =>{
-        res.status(400).send({success: false, message:"Producto no encontrado", err, code:"6.3.0"});
+    .then (dataConexion => {
+        productosGlobalesSchema.findById(dataConexion.id_producto_global)
+        .then (dataGlobal => {
+            res.status(200).send({success: true, message:"Producto obtenido correctamente", dataGlobal});
+        }).catch(err => {
+            res.status(400).send({success: false, message:"Producto no encontrado", err, code:"6.3.0"});
+        });
+    }).catch(err => {
+        res.status(400).send({success: false, message:"Producto no encontrado", err, code:"6.3.1"});
     });
 }
 
@@ -69,7 +74,7 @@ exports.obtenerConexionProductoProveedores = async (req, res, next)=>{
             } else {
                 res.status(200).send({success: true, message:"Los porveedores fueron encontrados", data: docs});
             }
-        })
+        });
     }).catch(err => {
         res.status(400).send({success: false, message:"No se encontraron proveedores", err, code:"6.4.1"});
     });
@@ -121,5 +126,48 @@ exports.obtenerProductosGlobalesCategoria = async (req, res, next) => {
         res.status(200).send({success: true, message:"Productos obtenido correctamente", data});
     }).catch(err =>{
         res.status(400).send({success: false, message:"No se encontro el producto", err, code:"6.8.0"});
+    })
+}
+
+// Obtener productos por id de almacen y aid de categoria 6.9.0
+exports.obtenerProductosIDAlmacenCategoria = async (req, res, next) => {
+    const {id_categoria, id_almacen} = req.params;
+    let id_productos = [];
+    let ids = [];
+    
+    conexionProductoSchema.find({
+        "id_categoria_global": id_categoria,
+        "id_almacen": id_almacen
+    })
+    .then( data =>{
+        data.map(producto => {
+            id_productos.push(producto.id_producto_global);
+            ids.push(producto._id);
+        })
+        productosGlobalesSchema.find({
+            '_id': { $in: id_productos}
+        }, (err, docs) => {
+            if (err) {
+                res.status(400).send({success: false, message:"Error en encontrar los proveedores", err, code:"6.9.0"});
+            } else {
+                let docs_copia = [];
+                ids.map((id, index) => {
+                    docs_copia.push({
+                        "id_enlaze": id,
+                        "_id": docs[index]._id,
+                        "id_categoria_global": docs[index].id_categoria_global,
+                        "nombre": docs[index].nombre,
+                        "descripcion": docs[index].descripcion,
+                        "unidad_medida": docs[index].unidad_medida,
+                        "createdAt": docs[index].createdAt,
+                        "updatedAt": docs[index].updatedAt,
+                        "__v": docs[index].__v
+                    });
+                });
+                res.status(200).send({success: true, message:"Productos obtenido correctamente", data: docs_copia});
+            }
+        });
+    }).catch(err =>{
+        res.status(400).send({success: false, message:"No se encontro el producto", err, code:"6.9.1"});
     })
 }

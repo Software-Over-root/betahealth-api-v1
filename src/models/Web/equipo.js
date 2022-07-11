@@ -23,12 +23,10 @@ const EquipoSchema = new Schema(
             required: true
         },
         habilidades: {
-            type: String,
-            required: true
+            type: String
         },
         referencias: {
-            type: String,
-            required: true
+            type: String
         }
     },
     {

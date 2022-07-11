@@ -26,6 +26,10 @@ const ProductoSchema = new Schema(
         cantidad: {
             type: Number,
             required: true
+        },
+        precio: {
+            type: Number,
+            default: 0
         }
     }
 );

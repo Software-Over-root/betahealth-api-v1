@@ -1,8 +1,9 @@
 // Errores 7.0.0
 const ProveedorSchema = require("../models/proveedor");
+const conexionProductoSchema = require("../models/conexion_producto");
 
 
-// agregar proveedor
+// agregar proveedor 7.0.0
 exports.agregarProveedor = (req, res, next) => {
     const { 
         nombre_proveedor, 
@@ -40,7 +41,7 @@ exports.agregarProveedor = (req, res, next) => {
     });
 }
 
-// obtener todos los proveedores
+// obtener todos los proveedores 7.1.0
 exports.obtenerProveedores = (req, res, next) => {
     ProveedorSchema.find()
     .then(data => {
@@ -50,7 +51,7 @@ exports.obtenerProveedores = (req, res, next) => {
     });
 }
 
-// obtener un proveedor
+// obtener un proveedor 7.2.0
 exports.obtenerProveedor = async (req, res, next) => {
     const { id } = req.params;
     ProveedorSchema.findById(id)
@@ -61,7 +62,7 @@ exports.obtenerProveedor = async (req, res, next) => {
     });  
 }
 
-// eliminar proveedor
+// eliminar proveedor 7.3.0
 exports.eliminarProveedor = async (req, res, next) => {
     const { id } = req.params;
     ProveedorSchema.remove({ _id: id })
@@ -73,7 +74,7 @@ exports.eliminarProveedor = async (req, res, next) => {
     }); 
 }
 
-// actualizar proveedor
+// actualizar proveedor 7.4.0
 exports.actualizarProveedor = async (req, res, next) => {
     const { id } = req.params;
     const { 
@@ -112,6 +113,7 @@ exports.actualizarProveedor = async (req, res, next) => {
     });
 }
 
+// obtener provedores por lista de ids 7.5.0
 exports.obtenerProveedoresPorId = async (req, res, next) => {
     ProveedorSchema.find({
         _id: {$in: req.body.proveedores}
@@ -121,4 +123,28 @@ exports.obtenerProveedoresPorId = async (req, res, next) => {
     }).catch(err => {
         res.status(400).send({success: false, message:"No se logro obtener los proveedores", type: err, code:"7.5.0"});
     });
+}
+
+// obtener provedores por id de producto 7.6.0
+exports.obtenrProvedoresIdProducto = async (req, res, next) => {
+    const {id} = req.params;
+    conexionProductoSchema.find({"id_producto_global": id})
+    .then( data => {
+        let idsProveedores = [];
+        data.map(conexion => {
+            if (conexion.id_proveedor) {
+                idsProveedores.push(conexion.id_proveedor);
+            }
+        });
+        ProveedorSchema.find({
+            _id: {$in: idsProveedores}
+        })
+        .then( data => {
+            res.status(200).send({success: true, message:"Productos obtenido correctamente", data});
+        }).catch(err =>{
+            res.status(400).send({success: false, message:"No se encontro el producto", err, code:"7.6.0"});
+        })
+    }).catch(err =>{
+        res.status(400).send({success: false, message:"No se encontro el producto", err, code:"7.6.1"});
+    })
 }

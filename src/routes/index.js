@@ -141,6 +141,8 @@ module.exports = function(){
     router.delete('/eliminar-testimonial/:id', testimoniales.eliminarTestimonial);
     router.post('/agregar-testimonial', testimoniales.agregarTestimonial);
 
+    // fin de rutas de pagina web
+
 
     router.get('/', users.holaMundo);
 
@@ -181,6 +183,7 @@ module.exports = function(){
     router.get('/categoria-global/:id', categoria_globales.obtenerCategoriaGlobal);
     router.delete('/eliminar-categorias-global/:id', categoria_globales.eliminarCategoriaGlobal);
     router.post('/agregar-categoria-global', categoria_globales.agregarCategoriaGlobal);
+    router.put('/actualizar-categoria-global/:id',categoria_globales.actualizarCategoriaGlobal);
 
     // productos globales
     router.get('/productos-globales', productos_globales.obtenerProductosGlobales);
@@ -189,7 +192,8 @@ module.exports = function(){
     router.get('/producto-global/:id', productos_globales.obtenerUnProductoGlobal);
     router.put('/actualizar-producto-global/:id',productos_globales.actualizarProductoGlobal);
     router.delete('/eliminar-producto-global/:id', productos_globales.eliminarProductoGlobal);
-    router.post('/agregar-producto-global', productos_globales.agregarProductoGlobal);
+    router.post('/productos-globales-id', productos_globales.obtenerProductosGlobalesIDs);
+    router.post('/categoria-productos-globales-id', productos_globales.obtenerCategoriasIdsProductos);
 
     //conexion categoria (con proveedores y almacenes)
     router.get('/categorias-conexion', conexion_categoria.obtenerConexionCategorias);
@@ -218,6 +222,7 @@ module.exports = function(){
         router.post('/agregar-producto-conexion-almacen', conexion_producto.agregarConexionProductoAlmacen);
         router.get('/productos-conexion-almacen/:id', conexion_producto.obtenerConexionProductosAlmacen);
         router.get('/conexion-productos-categoria/:id', conexion_producto.obtenerProductosGlobalesCategoria);
+        router.get('/conexion-productos-almacen-categoria/:id_categoria/:id_almacen', conexion_producto.obtenerProductosIDAlmacenCategoria);
     
     // proveedores
     router.get('/proveedores', proveedores.obtenerProveedores);
@@ -226,6 +231,7 @@ module.exports = function(){
     router.put('/actualizar-proveedor/:id', proveedores.actualizarProveedor);
     router.delete('/eliminar-proveedor/:id', proveedores.eliminarProveedor);
     router.post('/agregar-proveedor', proveedores.agregarProveedor);
+    router.get('/proveedor-conexion-producto/:id', proveedores.obtenrProvedoresIdProducto);
 
     // lotes
     router.get('/lotes', lotes.obtenerLotes);
@@ -237,12 +243,12 @@ module.exports = function(){
     router.post('/agregar-multiples-lotes', lotes.agregarMultiplesLotes);
 
     // requisiciones a proveedor
-    router.get('/requisiciones', requisiciones_proveedor.obtenerRequisiciones);
-    router.get('/requisiciones-estatus/:estatus', requisiciones_proveedor.obtenerRequisicionesPorEstatus);
-    router.get('/requisicion/:id', requisiciones_proveedor.obtenerRequisicion);
-    router.put('/actualizar-requisicion/:id', requisiciones_proveedor.actualizarRequisicion);
-    router.delete('/eliminar-requisicion/:id', requisiciones_proveedor.eliminarRequisicion);
-    router.post('/agregar-requisicion', requisiciones_proveedor.agregarRequisicion);
+    router.get('/ordenes', requisiciones_proveedor.obtenerRequisiciones);
+    router.get('/ordenes-estatus/:estatus', requisiciones_proveedor.obtenerRequisicionesPorEstatus);
+    router.get('/orden/:id', requisiciones_proveedor.obtenerRequisicion);
+    router.put('/actualizar-orden/:id', requisiciones_proveedor.actualizarRequisicion);
+    router.delete('/eliminar-orden/:id', requisiciones_proveedor.eliminarRequisicion);
+    router.post('/agregar-orden', requisiciones_proveedor.agregarRequisicion);
 
     //categoria gastos
     router.get('/categorias-gastos', categoria_gastos.obtenerCatGastos);

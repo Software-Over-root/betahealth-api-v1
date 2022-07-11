@@ -28,7 +28,7 @@ exports.obtenerUsuario = async (req, res, next)=>{
 exports.obtenerUnUsuario = async (req, res, next)=>{
     const {id} = req.params;
     usuariosSchema.findById(id)
-    .then(data =>{
+    .then(data => {
         res.status(200).send({success: true , message:"El usuarios fue encontrado", data});
     }).catch(err =>{
         res.status(400).send({success: false, message:"No se encontro el usuarios", err, code:"1.2.0"});
