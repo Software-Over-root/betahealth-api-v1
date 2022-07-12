@@ -57,3 +57,15 @@ exports.actualizarArchivo = async (req, res, next) =>{
     });
 
 }
+
+// Obtener archicos por ruta
+exports.obtenerArchivoRuta = async (req, res, next) => {
+    const {id} = req.params;
+    ArchivosSchema.find({"id_ubicacion": id})
+    .then( data => {
+        res.status(200).send({success: true, message:"Archivo obtenido correctamente", data});
+    }).catch(err => {
+        res.status(400).send({success: false, message:"No se encontro archivo", err, code:"19.5.0"});
+    })
+}
+

@@ -302,6 +302,7 @@ module.exports = function(){
     // carpetas
     router.get('/carpetas', carpetas.obtenerCarpetas);
     router.get('/carpeta/:id', carpetas.obtenerCarpeta);
+    router.get('/carpetas-ubicacion/:id', carpetas.obtenerCarpetaRuta);
     router.put('/actualizar-carpeta/:id', carpetas.actualizarCarpeta);
     router.delete('/eliminar-carpeta/:id', carpetas.eliminarCarpeta);
     router.post('/agregar-carpeta', carpetas.agregarCarpeta);
@@ -309,6 +310,7 @@ module.exports = function(){
     // archivos
     router.get('/archivos', archivos.obtenerArchivos);
     router.get('/archivo/:id', archivos.obtenerArchivo);
+    router.get('/archivo-ubicacion/:id', archivos.obtenerArchivoRuta);
     router.put('/actualizar-archivo/:id', archivos.actualizarArchivo);
     router.delete('/eliminar-archivo/:id', archivos.eliminarArchivo);
     router.post('/agregar-archivo', archivos.agregarArchivo);

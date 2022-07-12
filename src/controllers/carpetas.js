@@ -47,14 +47,24 @@ exports.eliminarCarpeta = async (req, res, next) =>{
 }
 
 //Actualizar carpeta
-exports.actualizarCarpeta = async (req, res, next) =>{
+exports.actualizarCarpeta = async (req, res, next) => {
     const {id} = req.params;
     const { nombre, id_ubicacion, modificaciones }= req.body;
     CarpetasSchema.updateOne({_id:id}, {$set:{ nombre, id_ubicacion, modificaciones }})
-    .then(data =>{
+    .then(data => {
         res.status(200).send({success:true , message:"Se actualizo la carpeta correctamente", data});
-    }).catch(err=>{
+    }).catch(err => {
         res.status(400).send({success:false, message:"No se logro actualizar la carpeta", err, code:"19.4.0"});
     });
+}
 
+// Obtener carpetas por ruta
+exports.obtenerCarpetaRuta = async (req, res, next) => {
+    const {id} = req.params;
+    CarpetasSchema.find({"id_ubicacion": id})
+    .then( data => {
+        res.status(200).send({success: true, message:"Carpetas obtenido correctamente", data});
+    }).catch(err => {
+        res.status(400).send({success: false, message:"No se encontro carpetas", err, code:"19.5.0"});
+    })
 }
